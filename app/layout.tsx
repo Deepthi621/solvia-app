@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Therapy Agent",
+  title: "Solvia",
   description: "Your personal AI therapy companion",
 };
 
