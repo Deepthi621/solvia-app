@@ -1,4 +1,4 @@
-# Aura3.0: AI-Powered Mental Health Support on Sonic 🧠⛓️
+# Solvia: AI-Powered Mental Health Support on Sonic 🧠⛓️
 
 [![Sonic Token](https://img.shields.io/badge/Sonic-Integration-purple.svg)]()
 [![Zerepy](https://img.shields.io/badge/Zerepy-AI_Agent-blue.svg)]()
