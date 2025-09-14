@@ -1,245 +1,265 @@
-# Solvia: AI-Powered Mental Health Support on Sonic 🧠⛓️
+# AI Therapist Agent
 
-[![Sonic Token](https://img.shields.io/badge/Sonic-Integration-purple.svg)]()
-[![Zerepy](https://img.shields.io/badge/Zerepy-AI_Agent-blue.svg)]()
-[![HIPAA](https://img.shields.io/badge/HIPAA-Compliant-green.svg)]()
-[![Crisis Response](https://img.shields.io/badge/Crisis-Detection-red.svg)]()
-[![Smart Contract](https://img.shields.io/badge/Sonic_Blaze-Testnet-orange.svg)]()
+A comprehensive AI-powered therapy platform that provides empathetic, evidence-based therapeutic support through intelligent conversation and session management.
 
-> An autonomous AI therapist powered by advanced NLP and emotional intelligence, providing personalized mental health support while ensuring privacy through blockchain technology. Built on Sonic Blaze Testnet with Zerepy agents.
+## 🌟 Features
 
-## 📸 Project Showcase
+### Core Functionality
+- **AI-Powered Therapy Sessions**: Intelligent conversations using Google's Gemini AI
+- **Session Management**: Create, track, and manage therapy sessions
+- **Chat History**: Persistent conversation history with timestamps
+- **User Authentication**: Secure user registration and login
+- **Mood Tracking**: Monitor emotional states and progress
+- **Activity Logging**: Track therapeutic activities and exercises
 
-<div align="center">
-  <img src="https://i.imghippo.com/files/uath6507iKU.png" alt="Solvia Dashboard" width="45%" />
-  <img src="https://i.imghippo.com/files/CBbx8767gPg.png" alt="Therapy Session" width="45%" />
-</div>
+### Technical Features
+- **Real-time Chat**: Instant AI responses with context awareness
+- **Session Analytics**: Progress tracking and emotional state analysis
+- **Responsive Design**: Modern UI built with Next.js and Tailwind CSS
+- **Database Integration**: MongoDB for persistent data storage
+- **API Architecture**: RESTful backend with Express.js
+- **Event Processing**: Inngest for background task management
 
-<div align="center">
-  <img src="https://i.imghippo.com/files/RHud5372Iq.png" alt="Progress Tracking" width="45%" />
-  <img src="https://i.imghippo.com/files/FBU1874HaE.png" alt="Mental Health Analytics" width="45%" />
-</div>
+## 🏗️ Architecture
 
-<div align="center">
-  <img src="https://i.imghippo.com/files/Su5718PoM.png" alt="AI Interaction" width="45%" />
-  <img src="https://i.imghippo.com/files/Q1022fI.png" alt="Therapeutic Features" width="45%" />
-</div>
+### Frontend (Next.js)
+- **Framework**: Next.js 14 with App Router
+- **UI Components**: Radix UI + Tailwind CSS
+- **State Management**: Zustand
+- **Authentication**: NextAuth.js
+- **Styling**: Tailwind CSS with custom components
 
-## 🌟 Key Features
-
-### 🤖 Advanced AI Therapy System
-
-- **Zerepy Agent Integration**
-  - Advanced autonomous agent powered by state-of-the-art gpt-4
-  - Multi-agent coordination for comprehensive care
-  - Dynamic personality adaptation based on user needs
-  - Specialized therapeutic approaches and interventions
-  - Real-time crisis detection and emergency protocols
-  - Continuous learning and improvement system
-
-### 🎨 Blockchain-Secured Therapy Sessions
-
-- **Smart Contract Architecture**
-
-  ```solidity
-  struct TherapySession {
-      uint256 sessionId;
-      uint256 timestamp;
-      string summary;
-      string[] topics;
-      uint256 duration;
-      uint8 moodScore;
-      string[] achievements;
-      bool completed;
-  }
-  ```
-
-- **HIPAA-Compliant Data Management**
-
-  - End-to-end encryption for all communications
-  - Zero-knowledge proofs for privacy
-  - Decentralized storage of session records
-  - Granular consent management system
-
-- **NFT-Based Progress Tracking**
-  - ERC-721 therapy session certificates
-  - Achievement-based milestone NFTs
-  - Privacy-preserving metadata structure
-  - Verifiable progress records
-
-### 🌈 Interactive Therapeutic Features
-
-- **Mindfulness Activities**
-
-  - Breathing exercises with visual guidance
-  - Digital Zen garden for stress relief
-  - Virtual forest walks
-  - Ocean wave meditation
-
-- **Smart Environment Integration**
-  - IoT device synchronization
-  - Ambient lighting control
-  - Therapeutic sound management
-  - Environmental adaptation to mood
-
-### 💫 Sonic Token Integration
-
-```typescript
-interface ISonicToken {
-    function mint(address to, uint256 amount) external;
-    function stake(uint256 amount) external;
-    function getRewards() external view returns (uint256);
-}
-```
-
-- **Tokenized Reward System**
-  - Achievement-based token distribution
-  - Engagement staking mechanisms
-  - Community participation rewards
-  - Progress milestone bonuses
-
-## 🛠 Technical Implementation
-
-### AI Agent Architecture
-
-```typescript
-class TherapyAgentConfig {
-  name: string;
-  personality: string;
-  specialties: string[];
-  language_model: string = "gemini-1.5-flash";
-  temperature: float = 0.7;
-  therapy_approach: string;
-  crisis_protocol: Object;
-}
-```
-
-### Security Measures
-
-- **Blockchain Security**
-
-  - Smart contract auditing
-  - Multi-signature therapy session validation
-  - Encrypted on-chain storage
-  - Automated security monitoring
-
-- **Data Protection**
-  - HIPAA-compliant encryption
-  - Secure key management
-  - Regular security audits
-  - Privacy-preserving analytics
-
-### Crisis Detection System
-
-```typescript
-const detectStressSignals = (message: string): StressPrompt | null => {
-  const stressKeywords = [
-    "stress",
-    "anxiety",
-    "worried",
-    "panic",
-    "overwhelmed",
-    "nervous",
-    "tense",
-    "pressure",
-  ];
-  // Advanced pattern matching and intervention logic
-};
-```
+### Backend (Node.js/Express)
+- **Runtime**: Node.js with TypeScript
+- **Framework**: Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **AI Integration**: Google Generative AI (Gemini)
+- **Event Processing**: Inngest
+- **Authentication**: JWT tokens
 
 ## 🚀 Getting Started
 
-1. **Clone & Install**
+### Prerequisites
+- Node.js 18+ 
+- MongoDB Atlas account or local MongoDB
+- Google AI API key (Gemini)
+- Inngest account (optional, for event processing)
 
+### Installation
+
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/blocklinklabs/aura3.0.git
-   cd aura3.0
+   git clone <repository-url>
+   cd ai-therapist-agent
+   ```
+
+2. **Install frontend dependencies**
+   ```bash
    npm install
    ```
 
-2. **Configure Environment**
-
+3. **Install backend dependencies**
    ```bash
-   cp .env.example .env
-   # Add required API keys:
-   # - SONIC_PRIVATE_KEY
-   # - GEMINI_API_KEY
-   # - ZEREPY_API_KEY
+   cd backend
+   npm install
+   cd ..
    ```
 
-3. **Deploy Smart Contracts**
-
-   ```bash
-   npx hardhat run scripts/deploy.ts --network sonic_blaze_testnet
+4. **Environment Setup**
+   
+   Create a `.env.local` file in the root directory:
+   ```env
+   # Database
+   MONGODB_URI=your_mongodb_connection_string
+   
+   # AI Services
+   GEMINI_API_KEY=your_google_ai_api_key
+   
+   # Authentication
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   
+   # Backend API
+   BACKEND_API_URL=http://localhost:3001
+   
+   # Inngest (optional)
+   INNGEST_EVENT_KEY=your_inngest_key
+   INNGEST_SIGNING_KEY=your_inngest_signing_key
    ```
 
-4. **Start Development Server**
+   Create a `.env` file in the backend directory:
+   ```env
+   # Database
+   MONGODB_URI=your_mongodb_connection_string
+   
+   # AI Services
+   GEMINI_API_KEY=your_google_ai_api_key
+   
+   # Server
+   PORT=3001
+   JWT_SECRET=your_jwt_secret
+   
+   # Inngest (optional)
+   INNGEST_EVENT_KEY=your_inngest_key
+   INNGEST_SIGNING_KEY=your_inngest_signing_key
+   ```
+
+### Running the Application
+
+1. **Start the backend server**
+   ```bash
+   cd backend
+   npm run dev
+   ```
+   The backend will run on `http://localhost:3001`
+
+2. **Start the frontend server** (in a new terminal)
    ```bash
    npm run dev
    ```
+   The frontend will run on `http://localhost:3000`
 
-## 📈 Performance Metrics
+3. **Access the application**
+   Open your browser and navigate to `http://localhost:3000`
 
-- Response Time: <100ms
-- Emotion Detection Accuracy: 94.5%
-- Crisis Prediction Precision: 91.3%
-- Transaction Throughput: 2000 TPS
-- NFT Minting Time: ~15s
+## 📁 Project Structure
 
-## 🔒 Security & Compliance
+```
+ai-therapist-agent/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   ├── auth/          # Authentication endpoints
+│   │   └── chat/          # Chat session endpoints
+│   ├── therapy/           # Therapy session pages
+│   └── globals.css        # Global styles
+├── backend/               # Backend server
+│   ├── src/
+│   │   ├── controllers/   # Route controllers
+│   │   ├── models/        # Database models
+│   │   ├── routes/        # API routes
+│   │   ├── middleware/    # Custom middleware
+│   │   ├── utils/         # Utility functions
+│   │   └── inngest/       # Event processing
+│   └── package.json
+├── components/            # React components
+│   ├── ui/               # Reusable UI components
+│   └── therapy/          # Therapy-specific components
+├── lib/                  # Utility libraries
+├── hooks/                # Custom React hooks
+└── public/               # Static assets
+```
 
-- End-to-end encryption
-- HIPAA compliance
-- GDPR compliance
-- Regular security audits
-- Penetration testing
-- Privacy-preserving architecture
-- Zero-knowledge proof implementation
-- Secure key management
-- Multi-factor authentication
-- Role-based access control
+## 🔧 API Endpoints
 
-## 🗺 Development Roadmap
+### Authentication
+- `POST /auth/register` - User registration
+- `POST /auth/login` - User login
+- `GET /auth/session` - Get current session
 
-### Phase 1: Enhanced User Experience
+### Chat Sessions
+- `GET /chat/sessions` - Get all user sessions
+- `POST /chat/sessions` - Create new session
+- `GET /chat/sessions/:id` - Get specific session
+- `GET /chat/sessions/:id/history` - Get session history
+- `POST /chat/sessions/:id/messages` - Send message
 
-- Enhanced NFT visualization system
-- Advanced reward mechanisms
-- Mobile app release
-- NFT marketplace integration
-- Multi-language support
-- Advanced crisis intervention
-- Expanded IoT integration
-- Enhanced privacy features
+### Mood & Activities
+- `GET /api/mood` - Get mood entries
+- `POST /api/mood` - Create mood entry
+- `GET /api/activity` - Get activities
+- `POST /api/activity` - Log activity
 
-### Phase 2: Platform Expansion
+## 🧠 AI Integration
 
-- Group therapy features
-- DAO governance implementation
-- Cross-chain NFT bridging
-- Enhanced achievement system
-- AI model improvements
-- Community features
-- Advanced analytics
-- Expanded integrations
+The application uses Google's Gemini AI for therapeutic conversations:
+
+- **Context Awareness**: Maintains conversation context and user history
+- **Emotional Analysis**: Analyzes emotional states and risk factors
+- **Therapeutic Techniques**: Applies evidence-based therapeutic approaches
+- **Safety Monitoring**: Monitors for concerning content and risk factors
+
+## 🛡️ Security Features
+
+- **JWT Authentication**: Secure token-based authentication
+- **Input Validation**: Comprehensive input sanitization
+- **Rate Limiting**: API rate limiting for abuse prevention
+- **CORS Protection**: Cross-origin request security
+- **Helmet Security**: Security headers and protection
+
+## 📊 Database Schema
+
+### ChatSession
+```typescript
+{
+  sessionId: string;
+  userId: ObjectId;
+  startTime: Date;
+  status: "active" | "completed" | "archived";
+  messages: IChatMessage[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+### User
+```typescript
+{
+  email: string;
+  password: string; // hashed
+  name: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Connect your GitHub repository to Vercel
+2. Set environment variables in Vercel dashboard
+3. Deploy automatically on push to main branch
+
+### Backend (Railway/Heroku)
+1. Connect your repository to your hosting platform
+2. Set environment variables
+3. Configure MongoDB Atlas connection
+4. Deploy the backend service
+
+## 🧪 Testing
+
+```bash
+# Run frontend tests
+npm test
+
+# Run backend tests
+cd backend
+npm test
+```
 
 ## 🤝 Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-MIT License - see [LICENSE](LICENSE)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🌟 Acknowledgments
+## ⚠️ Disclaimer
 
-- Sonic
-- Zerepy AI Framework
-- Mental Health Professionals
-- Open Source Community
+This application is for educational and research purposes. It is not intended to replace professional mental health services. Users experiencing mental health crises should contact appropriate professional services.
 
----
+## 🆘 Support
 
-<p align="center">
-Built with ❤️ on Sonic Blaze Testnet and Zerepy for better mental health
-</p>
+For support, email your-email@example.com or create an issue in the repository.
+
+## 🙏 Acknowledgments
+
+- Google AI for Gemini API
+- Next.js team for the amazing framework
+- Radix UI for accessible components
+- MongoDB for database services
+- Inngest for event processing
