@@ -1,4 +1,4 @@
-# AI Therapist Agent
+# Solvia
 
 A comprehensive AI-powered therapy platform that provides empathetic, evidence-based therapeutic support through intelligent conversation and session management.
 
