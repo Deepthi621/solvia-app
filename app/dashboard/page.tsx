@@ -335,14 +335,44 @@ export default function Dashboard() {
     return days;
   };
 
-  // Modify the loadActivities function to use a default user ID
+  // Load activities from API instead of static data
   const loadActivities = useCallback(async () => {
     try {
-      const userActivities = await getUserActivities("default-user");
-      setActivities(userActivities);
-      setActivityHistory(transformActivitiesToDayActivity(userActivities));
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.warn("No authentication token found, using static data");
+        const userActivities = await getUserActivities("default-user");
+        setActivities(userActivities);
+        setActivityHistory(transformActivitiesToDayActivity(userActivities));
+        return;
+      }
+
+      const response = await fetch("/api/activity", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const userActivities = await response.json();
+        setActivities(userActivities);
+        setActivityHistory(transformActivitiesToDayActivity(userActivities));
+      } else {
+        console.error("Failed to fetch activities, using static data");
+        const userActivities = await getUserActivities("default-user");
+        setActivities(userActivities);
+        setActivityHistory(transformActivitiesToDayActivity(userActivities));
+      }
     } catch (error) {
       console.error("Error loading activities:", error);
+      // Fallback to static data
+      try {
+        const userActivities = await getUserActivities("default-user");
+        setActivities(userActivities);
+        setActivityHistory(transformActivitiesToDayActivity(userActivities));
+      } catch (fallbackError) {
+        console.error("Fallback also failed:", fallbackError);
+      }
     }
   }, []);
 
@@ -369,39 +399,63 @@ export default function Dashboard() {
   // Add function to fetch daily stats
   const fetchDailyStats = useCallback(async () => {
     try {
-      // Fetch therapy sessions using the chat API
-      const sessions = await getAllChatSessions();
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.warn("No authentication token found, using current activities");
+        if (activities.length > 0) {
+          setDailyStats(calculateDailyStats(activities));
+        }
+        return;
+      }
 
       // Fetch today's activities
-      const activitiesResponse = await fetch("/api/activities/today");
-      if (!activitiesResponse.ok) throw new Error("Failed to fetch activities");
-      const activities = await activitiesResponse.json();
-
-      // Calculate mood score from activities
-      const moodEntries = activities.filter(
-        (a: Activity) => a.type === "mood" && a.moodScore !== null
-      );
-      const averageMood =
-        moodEntries.length > 0
-          ? Math.round(
-              moodEntries.reduce(
-                (acc: number, curr: Activity) => acc + (curr.moodScore || 0),
-                0
-              ) / moodEntries.length
-            )
-          : null;
-
-      setDailyStats({
-        moodScore: averageMood,
-        completionRate: 100,
-        mindfulnessCount: sessions.length, // Total number of therapy sessions
-        totalActivities: activities.length,
-        lastUpdated: new Date(),
+      const activitiesResponse = await fetch("/api/activities/today", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+
+      if (activitiesResponse.ok) {
+        const todaysActivities = await activitiesResponse.json();
+        
+        // Calculate mood score from activities
+        const moodEntries = todaysActivities.filter(
+          (a: Activity) => a.type === "mood" && a.moodScore !== null
+        );
+        const averageMood =
+          moodEntries.length > 0
+            ? Math.round(
+                moodEntries.reduce(
+                  (acc: number, curr: Activity) => acc + (curr.moodScore || 0),
+                  0
+                ) / moodEntries.length
+              )
+            : null;
+
+        // Count therapy sessions from activities
+        const therapySessions = todaysActivities.filter((a: Activity) => a.type === "therapy").length;
+
+        setDailyStats({
+          moodScore: averageMood,
+          completionRate: 100,
+          mindfulnessCount: therapySessions,
+          totalActivities: todaysActivities.length,
+          lastUpdated: new Date(),
+        });
+      } else {
+        console.error("Failed to fetch today's activities, using current data");
+        if (activities.length > 0) {
+          setDailyStats(calculateDailyStats(activities));
+        }
+      }
     } catch (error) {
       console.error("Error fetching daily stats:", error);
+      // Fallback to current activities
+      if (activities.length > 0) {
+        setDailyStats(calculateDailyStats(activities));
+      }
     }
-  }, []);
+  }, [activities]);
 
   // Fetch stats on mount and every 5 minutes
   useEffect(() => {
@@ -459,12 +513,49 @@ export default function Dashboard() {
   const handleMoodSubmit = async (data: { moodScore: number }) => {
     setIsSavingMood(true);
     try {
-      await saveMoodData({
-        userId: "default-user",
-        mood: data.moodScore,
-        note: "",
-      });
+      const token = localStorage.getItem("token");
+      
+      if (token) {
+        // Use API endpoint for mood tracking
+        const response = await fetch("/api/mood", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ score: data.moodScore }),
+        });
+
+        if (response.ok) {
+          // Also log as activity for dashboard tracking
+          await fetch("/api/activity", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              type: "mood",
+              name: "Mood Check-in",
+              description: `Mood score: ${data.moodScore}`,
+              duration: 0,
+            }),
+          });
+        } else {
+          throw new Error("Failed to save mood");
+        }
+      } else {
+        // Fallback to static data
+        await saveMoodData({
+          userId: "default-user",
+          mood: data.moodScore,
+          note: "",
+        });
+      }
+      
       setShowMoodModal(false);
+      // Refresh activities to show updated mood data
+      loadActivities();
     } catch (error) {
       console.error("Error saving mood:", error);
     } finally {
