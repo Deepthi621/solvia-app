@@ -22,9 +22,9 @@ const features = [
   },
   {
     icon: <Shield className="w-10 h-10 text-primary" />,
-    title: "Blockchain Security",
+    title: "Security",
     description:
-      "Your therapy sessions are secured by blockchain technology, ensuring complete privacy and transparent record-keeping.",
+      "Your therapy sessions are secured , ensuring complete privacy and transparent record-keeping.",
   },
   {
     icon: <Brain className="w-10 h-10 text-primary" />,

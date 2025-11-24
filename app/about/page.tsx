@@ -9,13 +9,13 @@ const missions = [
     icon: <Heart className="w-8 h-8 text-primary" />,
     title: "Our Mission",
     description:
-      "To democratize access to mental health support through ethical AI and blockchain technology, making quality therapeutic care available to everyone, everywhere, at any time.",
+      "To democratize access to mental health support through ethical AI, making quality therapeutic care available to everyone, everywhere, at any time.",
   },
   {
     icon: <Target className="w-8 h-8 text-primary" />,
     title: "Our Vision",
     description:
-      "A world where mental health support is accessible, private, and personalized, powered by trusted AI agents and secured by blockchain technology.",
+      "A world where mental health support is accessible, private, and personalized, powered by trusted AI agents.",
   },
   {
     icon: <Sparkles className="w-8 h-8 text-primary" />,
@@ -39,8 +39,7 @@ export default function AboutPage() {
           About Solvia
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          We're revolutionizing mental health support by combining cutting-edge
-          AI technology with the security and transparency of blockchain.
+          We're revolutionizing mental health support by combining cutting-edge AI technology with an accessible, user-centric platform for personalized insights and care.
         </p>
       </motion.div>
 
