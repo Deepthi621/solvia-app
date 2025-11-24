@@ -48,7 +48,7 @@ const features = [
     icon: <LineChart className="w-10 h-10 text-primary" />,
     title: "Progress Tracking",
     description:
-      "Detailed analytics and insights about your mental health journey, with blockchain-verified session records.",
+      "Detailed analytics and insights about your mental health journey, with end-to-end encrypted session records.",
   },
   {
     icon: <Fingerprint className="w-10 h-10 text-primary" />,
